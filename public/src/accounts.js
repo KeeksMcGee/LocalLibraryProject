@@ -10,10 +10,13 @@ function sortAccountsByLastName(accounts) {
 }
 
 function getTotalNumberOfBorrows(account, books) {
- const accId = account.id;
- let total = 0; 
- books.forEach(book => book.borrows.forEach(borrow => accId === borrow.id && total++));
- return total
+ let accumulator = 0;
+ return books.reduce((acc, book) => {
+   let borrowed = 0;
+   acc += book.borrows.reduce((borrows, borrow) => 
+  borrows += borrow.id === account.id ? 1: 0, borrowed);
+   return acc;
+ }, accumulator);
 }
 
 function getBooksPossessedByAccount(account, books, authors) {
@@ -32,8 +35,8 @@ function getBooksPossessedByAccount(account, books, authors) {
 }
 
 module.exports = {
-  findAccountById,
-  sortAccountsByLastName,
-  getTotalNumberOfBorrows,
-  getBooksPossessedByAccount,
+ findAccountById,
+ sortAccountsByLastName,
+ getTotalNumberOfBorrows,
+ getBooksPossessedByAccount,
 };

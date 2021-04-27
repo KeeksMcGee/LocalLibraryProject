@@ -9,27 +9,10 @@ function findBookById(books, id) {
 }
 
 function partitionBooksByBorrowedStatus(books) {
-  let available = [];
-  let unavailable = [];
-  const bookStatus = [];
-  
-  //loop through the books
-  books.forEach((book) => {
-    //record the book's return status
-    const isBookReturned = !book.borrows[0]["returned"];
-    
-    if (isBookReturned) {//if book is returned
-      available.push(book);     
-    } else { //if book is not returned
-      unavailable.push(book);
-    }
-  });
-  
-  //push the arrays into the array we are returning
-  bookStatus.push(available);
-  bookStatus.push(unavailable);
-  console.log(bookStatus);
-  return bookStatus;
+  //find all the books that are returned 
+  const available = books.filter((book) => book.borrows[0].returned);
+  const unavailable = books.filter((book) => !book.borrows[0].returned);
+  return [unavailable, available];
 }
 
 function getBorrowersForBook(book, accounts) {

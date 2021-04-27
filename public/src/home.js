@@ -43,7 +43,8 @@ function getMostCommonGenres(books) {
 }
 
 function getMostPopularBooks(books) {
-   let sortedByAmount = books.sort((a, b) => b.borrows.length - a.borrows.length); console.log(sortedByAmount); 
+  let sortedByAmount = books.sort((a, b) => b.borrows.length - a.borrows.length);
+  console.log(sortedByAmount);
   let results = sortedByAmount.map(book => { 
     return { name: book.title, count: book.borrows.length }; 
   }); 
